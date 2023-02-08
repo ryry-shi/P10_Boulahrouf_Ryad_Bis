@@ -9,7 +9,6 @@ from .models import Projects
 class ProjectAPIView(viewsets.ModelViewSet):
 
     serializer_class = ProjectSerializer
-    # queryset = Projects.objects.all()
 
 
     def get_queryset(self):
@@ -29,14 +28,13 @@ class ProjectAPIView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def post(self, request,*args, **kwargs):
+    def delete(self, project_id, *args, **kwargs):
+        project_data = Projects.objects.get(pk=project_id)
+        project_data.delete()
+        return project_data
 
-    #     project_data = request.data
-    #     serializer = self.serializer_class(data=project_data)
-    #     if serializer.is_valid:
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_200_OK)
-    #     else:
-    #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# Create your views here.
+    def put(self, project_id, *args, **kwargs):
+        project_data = Projects.objects.get(pk=project_id)
+        serializer = self.serializer_class(data=project_data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
