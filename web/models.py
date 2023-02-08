@@ -8,9 +8,8 @@ class Projects(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=50)
     type = models.CharField(max_length=50)
-    author = models.ForeignKey(
-        to=MyUser,
-        on_delete=models.CASCADE,
+    author_user_id = models.ForeignKey(
+        to=MyUser, on_delete=models.CASCADE, related_name="project_user_id"
     )
 
 # Create your models here.
