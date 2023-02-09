@@ -12,7 +12,7 @@ from rest_framework_simplejwt.views import (
 router = routers.SimpleRouter()
 
 router.register('signup', MyUserAPIView, basename='signup')
-router.register('project', ProjectAPIView, basename='project')
+router.register('projects', ProjectAPIView, basename='project')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

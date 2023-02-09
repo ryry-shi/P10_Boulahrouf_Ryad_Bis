@@ -8,15 +8,15 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Projects
-        fields = ["title", "description", "type", "author_user_id"]
+        fields = ["title", "description", "type"]
 
     def create_projects(self, validated_data):
         project = Projects.objects.create(
             title=validated_data["title"],
             description=validated_data["description"],
             type=validated_data["type"],
+            author_user_id=self.id,
         )
-        # project.author_user_id = MyUser.objects.get(pk='id')
         project.save()
         return project
 

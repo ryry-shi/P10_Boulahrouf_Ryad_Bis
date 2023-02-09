@@ -11,8 +11,8 @@ class ProjectAPIView(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
 
-    def get_queryset(self):
-        return Projects.objects.filter(author_user_id=1)
+    def get_queryset(self, *args, **kwargs):
+        return Projects.objects.filter(author_user_id=self.request.user)
 
     def get(self, *args, **kwargs):
         project = Projects.objects.get(author_user_id="username")  
