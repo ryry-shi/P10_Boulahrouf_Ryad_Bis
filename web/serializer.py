@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Projects, Contributors
+from .models import Projects, Contributors, Issues
 from user.serializer import MyUserSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -35,11 +35,19 @@ class ContributorSerializer(serializers.ModelSerializer):
         )
         author.save()
         return author
-    # def get_author_user_id(self, instance):
-    #     queryset = instance.author_user_id
-    #     serializer = MyUserSerializer(queryset)
-    #     return serializer.data
-    #      def get_products(self, instance):
-    #     queryset = instance.products.filter(active=True)
-    #     serializer = ProductListSerializers(queryset, many=True)
-    #     return serializer.data
+
+class IssueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Issues
+        fields = ["title", "tag"]
+
+    def create_issues(self, validated_data):
+        issue = Issues.objects.create(
+            title=validated_data["title"],
+            tag=validated_data["tag"],
+            project_id=self.project_id,
+        )
+        issue.save()
+        return issue
+

@@ -15,6 +15,7 @@ class Projects(models.Model):
 
 class Contributors(models.Model):
 
+
     role = models.CharField(
         max_length=50,
     )
