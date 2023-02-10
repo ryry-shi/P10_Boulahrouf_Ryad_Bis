@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Projects
+from .models import Projects, Contributors
 from user.serializer import MyUserSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -20,6 +20,21 @@ class ProjectSerializer(serializers.ModelSerializer):
         project.save()
         return project
 
+
+class ContributorSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = Contributors
+        fields = ["role"]
+
+
+    def create_contributor(self, validated_data):
+        author = Contributors.objects.create(
+            role=validated_data["role"]
+        )
+        author.save()
+        return author
     # def get_author_user_id(self, instance):
     #     queryset = instance.author_user_id
     #     serializer = MyUserSerializer(queryset)

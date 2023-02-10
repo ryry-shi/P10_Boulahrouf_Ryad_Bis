@@ -3,8 +3,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 
-from .serializer import ProjectSerializer
-from .models import Projects
+from .serializer import ProjectSerializer, ContributorSerializer
+from .models import Projects, Contributors
 
 class ProjectAPIView(viewsets.ModelViewSet):
 
@@ -38,3 +38,11 @@ class ProjectAPIView(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=project_data)
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+
+class ContributorAPIView(viewsets.ModelViewSet):
+
+    serializer_class = ContributorSerializer
+
+    def get_queryset(self):
+        return Contributors.objects.filter()
