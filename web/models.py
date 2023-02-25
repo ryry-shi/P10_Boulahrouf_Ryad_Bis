@@ -23,12 +23,12 @@ class Contributors(models.Model):
         to=MyUser, on_delete=models.CASCADE, related_name="user_id_contributor"
     )
     project_id = models.ForeignKey(
-        to=Projects, on_delete=models.CASCADE, related_name="project_user_id_contributors"
+        to=Projects, on_delete=models.CASCADE, related_name="project_author_id"
     )
 
 
 
-class Issues(models.Model):
+class Issue(models.Model):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=50)
     tag = models.CharField(max_length=50)
@@ -39,7 +39,9 @@ class Issues(models.Model):
         to=MyUser, on_delete=models.CASCADE, related_name="author_user"
     )
     assignee_user_id = models.ForeignKey(
-        to=MyUser, on_delete=models.CASCADE, related_name="assigne_issue"
+        to=Projects, on_delete=models.CASCADE, related_name="assigne_issue"
     )
     created_time = models.DateTimeField(auto_now=True)
+
+
 

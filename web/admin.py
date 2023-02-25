@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contributors, Projects
+from .models import Contributors, Projects, Issue
 
 class ProjectAdmin(admin.ModelAdmin):
 
@@ -11,8 +11,13 @@ class IssueAdmin(admin.ModelAdmin):
 
 class ContributorAdmin(admin.ModelAdmin):
 
-    list_display = ("role", "project_id", "user_id")
+    list_display = ("role")
+
+class Issues(admin.ModelAdmin):
+
+    list_display = ("title", "tag")
 
 
 admin.site.register(Projects)
 admin.site.register(Contributors)
+admin.site.register(Issue)
