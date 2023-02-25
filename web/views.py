@@ -45,7 +45,7 @@ class ContributorAPIView(viewsets.ModelViewSet):
     serializer_class = ContributorSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return Contributors.objects.filter(project_id=self.kwargs.get('project_pk'))
+        return Contributors.objects.filter(project_id=self.kwargs.get('project<<<_pk'))
 
 
     def create(self, request, *args, **kwargs):
