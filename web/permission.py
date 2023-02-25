@@ -1,7 +1,7 @@
 from rest_framework.permissions import BasePermission
 from rest_framework import permissions
 
-class IsAuthor(BasePermission):
+class MyProjectPermission(BasePermission):
 
     message = "You're not allowed because you're not the authoa."
 
@@ -9,7 +9,7 @@ class IsAuthor(BasePermission):
     def has_object_permission(self, request, view, obj):
         if obj.username == request.user.username:
             return True
-        elif request.method in permissions.SAFE_METHODS:
+        elif request.method == 'POST':
             return True
         return False
 

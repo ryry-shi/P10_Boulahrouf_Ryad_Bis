@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Projects, Contributors, Issues
+from .models import Contributors, Projects
 from user.serializer import MyUserSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
@@ -26,28 +26,15 @@ class ContributorSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = Contributors
-        fields = ["role"]
+        fields = ["role", "author_user_id","project_id"]
 
 
-    def create_contributor(self, validated_data):
+    def create_contributor(self, validated_data, **kwargs):
+        print(self)
         author = Contributors.objects.create(
-            role=validated_data["role"]
+            role=validated_data["role"],
+            author_user_id=validated_data["author_user_id"],
+            project_id=validated_data["project_id"],
         )
         author.save()
         return author
-
-class IssueSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Issues
-        fields = ["title", "tag"]
-
-    def create_issues(self, validated_data):
-        issue = Issues.objects.create(
-            title=validated_data["title"],
-            tag=validated_data["tag"],
-            project_id=self.project_id,
-        )
-        issue.save()
-        return issue
-
