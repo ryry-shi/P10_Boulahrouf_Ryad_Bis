@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import (
 
 router = routers.SimpleRouter()
 router.register(r'project', ProjectAPIView, basename="test")
-router.register(r'signup', MyUserAPIView, basename='signup')
+router.register('signup', MyUserAPIView, basename='signup')
 
 project_router = routers.NestedSimpleRouter(router, r'project', lookup='project')
 project_router.register(r'user', ContributorAPIView, basename="user")

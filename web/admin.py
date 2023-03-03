@@ -11,7 +11,7 @@ class IssueAdmin(admin.ModelAdmin):
 
 class ContributorAdmin(admin.ModelAdmin):
 
-    list_display = ("role")
+    list_display = ("role", "project_id")
 
 class Issues(admin.ModelAdmin):
 

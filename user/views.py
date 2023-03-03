@@ -7,12 +7,11 @@ from user.serializer import MyUserSerializer
 
 from user.models import MyUser
 
-class MyUserAPIView(viewsets.ModelViewSet):
 
+class MyUserAPIView(viewsets.ModelViewSet):
     permission_classes = [IsAuthor]
     serializer_class = MyUserSerializer
     queryset = MyUser.objects.all()
-
 
     def get(self, *args, **kwargs):
         queryset = MyUser.objects.all()
@@ -28,5 +27,5 @@ class MyUserAPIView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-            
+
 # Create your views here.

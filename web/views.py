@@ -44,13 +44,13 @@ class ContributorAPIView(viewsets.ModelViewSet):
     
     serializer_class = ContributorSerializer
 
-    def get_queryset(self, *args, **kwargs):
-        return Contributors.objects.filter(project_id=self.kwargs.get('project<<<_pk'))
-
-
-    def create(self, request, *args, **kwargs):
-        author = Contributors(project_id=self.kwargs.get("project_author_id"))
-        serializer = self.serializer_class(author, data=request.data)
+    def get_queryset(self, **kwargs):
+        print(self.kwargs)
+        return Contributors.objects.filter(project_id=self.kwargs["project_pk"])
+    
+    def create(self, request, *arg, **kwargs):
+        issue_data = Contributors(project_id=self.kwargs.get("project_pk"))
+        serializer = self.serializer_class(issue_data, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -73,11 +73,26 @@ class IssueAPIView(viewsets.ModelViewSet):
 
     serializer_class = IssueSerializer
 
-    def get_queryset(self):
-        return Issue.objects.all()
+    def get_queryset(self, **kwargs):
+        print(self.kwargs)
+        return Issue.objects.filter(project_id=self.kwargs["project_pk"])
     
-    def create(self, request, *arg, **args):
-        issue_data = request.data
-        serializer = self.serializer_class(data=issue_data)
-        if serializer.is_valid:
+    def create(self, request, *arg, **kwargs):
+        issue_data = Issue(author_user_id=self.kwargs.get("author_user"))
+        serializer = self.serializer_class(issue_data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    def delete(self, project_id, *args, **kwargs):
+        issue = Issue.objects.get(pk=project_id)
+        issue.delete()
+        return issue
+
+    def put(self, *args, **kwargs):
+        author = Issue.objects.get(pk=self.kwargs["projects_id"])
+        serializer = self.serializer_class(data=author)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)

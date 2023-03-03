@@ -4,12 +4,12 @@ from django.contrib.auth.hashers import (
     make_password,
 )
 
+
 class MyUserSerializer(serializers.ModelSerializer):
-
     class Meta:
-
         model = MyUser
-        fields = ['username', 'password']
+        fields = ["username", "password", "id"]
+        read_only_fields = ["id"]
 
     def create(self, validated_data):
         user = MyUser.objects.create(

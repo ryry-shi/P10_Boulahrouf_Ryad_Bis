@@ -17,14 +17,14 @@ class Contributors(models.Model):
 
 
     role = models.CharField(
-        max_length=50,
+        max_length=128,
     )
-    author_user_id = models.ForeignKey(
-        to=MyUser, on_delete=models.CASCADE, related_name="user_id_contributor"
+    author_user_id = models.IntegerField(
     )
-    project_id = models.ForeignKey(
-        to=Projects, on_delete=models.CASCADE, related_name="project_author_id"
-    )
+    project_id = models.IntegerField()
+    # project_id = models.ForeignKey(
+    #     to=Projects, on_delete=models.CASCADE, related_name="project_author_id"
+    # )
 
 
 
@@ -42,6 +42,9 @@ class Issue(models.Model):
         to=Projects, on_delete=models.CASCADE, related_name="assigne_issue"
     )
     created_time = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    pass
 
 
 
