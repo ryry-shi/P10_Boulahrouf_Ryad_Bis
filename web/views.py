@@ -23,8 +23,6 @@ class ProjectAPIView(viewsets.ModelViewSet):
     def get_queryset(self, *args, **kwargs):
         print(self.kwargs)
         return Projects.objects.all()
-        # queryset = Projects.objects.filter(author_user_id=self.request.user)
-        # return queryset
 
     def create(self, request, *args, **kwargs):
         project = Projects(author_user_id=self.request.user)
