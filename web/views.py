@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-from web.permission import MyIssuePermission, MyProjectPermission
+from web.permission import ContributorPermission, MyIssuePermission, MyProjectPermission
 
 from .serializer import (
     IssueSerializer,
@@ -21,7 +21,7 @@ class ProjectAPIView(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
     def get_queryset(self, *args, **kwargs):
-        print(self.kwargs)
+        # print([elt.user_id for elt in Contributors.objects.all()])
         return Projects.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -46,11 +46,10 @@ class ProjectAPIView(viewsets.ModelViewSet):
 
 
 class ContributorAPIView(viewsets.ModelViewSet):
+    permission_classes = [ContributorPermission]
     serializer_class = ContributorSerializer
 
     def get_queryset(self, **kwargs):
-        print(self.kwargs)
-        print(self.request.user.id)
         return Contributors.objects.filter(project_id=self.kwargs["project_pk"])
 
     def create(self, request, *arg, **kwargs):

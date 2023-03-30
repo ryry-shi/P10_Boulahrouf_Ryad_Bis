@@ -25,7 +25,7 @@ class ContributorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contributors
         fields = ["role", "user_id", "project_id", "id"]
-        read_only_fields = ["project_id", "id", "user_id"]
+        read_only_fields = ["project_id", "id"]
 
     def create_author(self, validated_data, **kwargs):
         author = Contributors.objects.create(
