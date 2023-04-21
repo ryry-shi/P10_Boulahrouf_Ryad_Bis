@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-from web.permission import ContributorPermission, MyIssuePermission, MyProjectPermission
+from web.permission import ContributorPermission, MyCommentPermission, MyIssuePermission, MyProjectPermission
 
 from .serializer import (
     IssueSerializer,
@@ -21,7 +21,6 @@ class ProjectAPIView(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
     def get_queryset(self, *args, **kwargs):
-        # print([elt.user_id for elt in Contributors.objects.all()])
         return Projects.objects.all()
 
     def create(self, request, *args, **kwargs):
@@ -49,7 +48,7 @@ class ContributorAPIView(viewsets.ModelViewSet):
     permission_classes = [ContributorPermission]
     serializer_class = ContributorSerializer
 
-    def get_queryset(self, **kwargs):
+    def get_queryset(self):
         return Contributors.objects.filter(project_id=self.kwargs["project_pk"])
 
     def create(self, request, *arg, **kwargs):
@@ -64,13 +63,12 @@ class ContributorAPIView(viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, project_id, *args, **kwargs):
-        author = Contributors.objects.get(pk=project_id)
+        author = Contributors.objects.get(pk=id)
         author.delete()
         return author
 
     def put(self, *args, **kwargs):
-        print(self.kwargs)
-        author = Contributors.objects.get(pk=self.kwargs["projects_id"])
+        author = Contributors.objects.get(pk=self.kwargs["project_pk"])
         serializer = self.serializer_class(data=author)
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
@@ -81,11 +79,12 @@ class IssueAPIView(viewsets.ModelViewSet):
     serializer_class = IssueSerializer
 
     def get_queryset(self, **kwargs):
-        return Issue.objects.all()
+        return Issue.objects.filter(project_id=self.kwargs["project_pk"])
 
     def create(self, request, *arg, **kwargs):
+        project = Projects.objects.get(project_id=self.kwargs.get("project_pk"))
         issue_data = Issue(
-            author_user_id=self.request.user,
+            author_user_id=project.author_user_id,
             assignee_user_id=self.request.user,
             project_id=self.kwargs.get("project_pk"),
         )
@@ -109,14 +108,15 @@ class IssueAPIView(viewsets.ModelViewSet):
 
 
 class CommentAPIView(viewsets.ModelViewSet):
+    permission_classes = [MyCommentPermission]
     serializer_class = CommentSerializer
 
-    def get_queryset(self, **kwargs):
-        print(self.kwargs.get("issue_pk"))
-        return Comment.objects.all()
+    def get_queryset(self):
+        return Comment.objects.filter(issue=self.kwargs.get("issue_pk"))
 
     def create(self, request, *arg, **kwargs):
-        comment = Comment(author_user_id=self.request.user)
+        issue = Issue.objects.get(id=self.kwargs.get("issue_pk"))
+        comment = Comment(author_user_id=self.request.user, issue=issue)
         serializer = self.serializer_class(comment, data=request.data)
         if serializer.is_valid():
             serializer.save()

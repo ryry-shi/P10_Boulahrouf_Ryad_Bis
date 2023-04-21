@@ -42,5 +42,5 @@ class Comment(models.Model):
     author_user_id = models.ForeignKey(
         to=MyUser, on_delete=models.CASCADE, related_name="comment_author"
     )
-    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE)
+    issue = models.ForeignKey(to=Issue, on_delete=models.CASCADE, related_name="comment_issue")
     created_time = models.DateTimeField(auto_now=True)

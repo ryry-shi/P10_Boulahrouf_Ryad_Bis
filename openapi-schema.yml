@@ -1,0 +1,1137 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /project/:
+    get:
+      operationId: listProjects
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+          description: ''
+      tags:
+      - project
+    post:
+      operationId: createProject
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+      tags:
+      - project
+  /project/{id}/:
+    get:
+      operationId: retrieveProject
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+      tags:
+      - project
+    put:
+      operationId: updateProject
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+      tags:
+      - project
+    patch:
+      operationId: partialUpdateProject
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+      tags:
+      - project
+    delete:
+      operationId: destroyProject
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - project
+  /signup/:
+    get:
+      operationId: listMyUsers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MyUser'
+          description: ''
+      tags:
+      - signup
+    post:
+      operationId: createMyUser
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyUser'
+          description: ''
+      tags:
+      - signup
+  /signup/{id}/:
+    get:
+      operationId: retrieveMyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this my user.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyUser'
+          description: ''
+      tags:
+      - signup
+    put:
+      operationId: updateMyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this my user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyUser'
+          description: ''
+      tags:
+      - signup
+    patch:
+      operationId: partialUpdateMyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this my user.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MyUser'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MyUser'
+          description: ''
+      tags:
+      - signup
+    delete:
+      operationId: destroyMyUser
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this my user.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - signup
+  /comment/:
+    get:
+      operationId: listComments
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comment
+    post:
+      operationId: createComment
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comment
+  /comment/{id}/:
+    get:
+      operationId: retrieveComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comment
+    put:
+      operationId: updateComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comment
+    patch:
+      operationId: partialUpdateComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - comment
+    delete:
+      operationId: destroyComment
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - comment
+  /project/{project_pk}/user/:
+    get:
+      operationId: listContributors
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+    post:
+      operationId: createContributor
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+  /project/{project_pk}/user/{id}/:
+    get:
+      operationId: retrieveContributor
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+    put:
+      operationId: updateContributor
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+    patch:
+      operationId: partialUpdateContributor
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contributor'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contributor'
+          description: ''
+      tags:
+      - project
+    delete:
+      operationId: destroyContributor
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - project
+  /project/{project_pk}/issue/:
+    get:
+      operationId: listIssues
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+    post:
+      operationId: createIssue
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Issue'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+  /project/{project_pk}/issue/{id}/:
+    get:
+      operationId: retrieveIssue
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+    put:
+      operationId: updateIssue
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Issue'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+    patch:
+      operationId: partialUpdateIssue
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Issue'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Issue'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+          description: ''
+      tags:
+      - project
+    delete:
+      operationId: destroyIssue
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - project
+  /project/{project_pk}/issue/{issue_pk}/comment/:
+    get:
+      operationId: listComments
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+    post:
+      operationId: createComment
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+  /project/{project_pk}/issue/{issue_pk}/comment/{id}/:
+    get:
+      operationId: retrieveComment
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+    put:
+      operationId: updateComment
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+    patch:
+      operationId: partialUpdateComment
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+          description: ''
+      tags:
+      - project
+    delete:
+      operationId: destroyComment
+      description: ''
+      parameters:
+      - name: project_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: issue_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - project
+  /token/:
+    post:
+      operationId: createTokenObtainPair
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenObtainPair'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenObtainPair'
+          description: ''
+      tags:
+      - token
+  /token/refresh/:
+    post:
+      operationId: createTokenRefresh
+      description: 'Takes a refresh type JSON web token and returns an access type
+        JSON web
+
+        token if the refresh token is valid.'
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TokenRefresh'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenRefresh'
+          description: ''
+      tags:
+      - token
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 50
+        description:
+          type: string
+          maxLength: 50
+        type:
+          type: string
+          maxLength: 50
+        project_id:
+          type: integer
+          readOnly: true
+        author_user_id:
+          type: string
+          readOnly: true
+      required:
+      - title
+      - description
+      - type
+    MyUser:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+        password:
+          type: string
+          maxLength: 50
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - username
+      - password
+    Comment:
+      type: object
+      properties:
+        description:
+          type: string
+          maxLength: 50
+        author_user_id:
+          type: string
+          readOnly: true
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        issue:
+          type: string
+          readOnly: true
+      required:
+      - description
+    Contributor:
+      type: object
+      properties:
+        role:
+          type: string
+          maxLength: 128
+        user_id:
+          type: integer
+        project_id:
+          type: integer
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - role
+      - user_id
+    Issue:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 50
+        tag:
+          type: string
+          maxLength: 50
+        author_user_id:
+          type: string
+          readOnly: true
+        assignee_user_id:
+          type: string
+          readOnly: true
+        project_id:
+          type: integer
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+      required:
+      - title
+      - tag
+    TokenObtainPair:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          writeOnly: true
+      required:
+      - username
+      - password
+    TokenRefresh:
+      type: object
+      properties:
+        refresh:
+          type: string
+        access:
+          type: string
+          readOnly: true
+      required:
+      - refresh

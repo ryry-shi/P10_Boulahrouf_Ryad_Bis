@@ -19,7 +19,7 @@ class IssueAdmin(admin.ModelAdmin):
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = "description"
+    list_display = ("description")
 
 
 admin.site.register(Projects)

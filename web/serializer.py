@@ -9,7 +9,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ["title", "description", "type", "project_id", "author_user_id"]
         read_only_fields = ["project_id", "author_user_id"]
 
-    #
     def create_projects(self, validated_data):
         project = Projects.objects.create(
             title=validated_data["title"],
@@ -65,13 +64,14 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ["description", "author_user_id", "created_time", "id", "issue"]
-        read_only_fields = ["author_user_id", "created_time"]
+        read_only_fields = ["author_user_id", "created_time", "issue"]
 
         def create_comment(self, validated_data, **kwargs):
             comment = Comment.objects.create(
                 description=validated_data["description"],
                 author_user_id=validated_data["author_user_id"],
                 created_time=validated_data["created_time"],
+                issue=validated_data["issue"]
             )
             comment.save()
             return comment
