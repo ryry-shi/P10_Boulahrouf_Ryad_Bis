@@ -22,8 +22,11 @@ class MyUserAPIView(viewsets.ModelViewSet):
         users_data = request.data
         serializer = self.serializer_class(data=users_data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            if not MyUser.objects.filter(username=serializer["username"]).exists():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response({'message':'User Already Exists'}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

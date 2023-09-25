@@ -6,8 +6,8 @@ from user.serializer import MyUserSerializer
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Projects
-        fields = ["title", "description", "type", "project_id", "author_user_id"]
-        read_only_fields = ["project_id", "author_user_id"]
+        fields = ["title", "description", "type", "project_id", "author_user_id", "pk"]
+        read_only_fields = ["project_id", "author_user_id", "pk"]
 
     def create_projects(self, validated_data):
         project = Projects.objects.create(
@@ -26,7 +26,7 @@ class ContributorSerializer(serializers.ModelSerializer):
         fields = ["role", "user_id", "project_id", "id"]
         read_only_fields = ["project_id", "id"]
 
-    def create_author(self, validated_data, **kwargs):
+    def create_author(self, validated_data):
         author = Contributors.objects.create(
             role=validated_data["role"],
             user_id=validated_data["user_id"],
@@ -45,16 +45,18 @@ class IssueSerializer(serializers.ModelSerializer):
             "assignee_user_id",
             "project_id",
             "id",
+            "priority",
         ]
         read_only_fields = ["project_id", "id", "author_user_id", "assignee_user_id"]
 
-    def create_issue(self, validated_data, **kwargs):
+    def create_issue(self, validated_data):
         issue = Issue.objects.create(
             title=validated_data["title"],
             tag=validated_data["tag"],
             project_id=validated_data["project_id"],
             author_user_id=validated_data["author_user_id"],
             assignee_user_id=validated_data["assignee_user_id"],
+            priority=validated_data["priority"],
         )
         issue.save()
         return issue
@@ -66,7 +68,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ["description", "author_user_id", "created_time", "id", "issue"]
         read_only_fields = ["author_user_id", "created_time", "issue"]
 
-        def create_comment(self, validated_data, **kwargs):
+        def create_comment(self, validated_data):
             comment = Comment.objects.create(
                 description=validated_data["description"],
                 author_user_id=validated_data["author_user_id"],

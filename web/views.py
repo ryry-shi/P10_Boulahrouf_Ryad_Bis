@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -13,7 +14,7 @@ from .serializer import (
     ContributorSerializer,
     CommentSerializer,
 )
-from .models import Comment, Projects, Contributors, Issue, Comment
+from .models import Comment, Projects, Contributors, Issue, Comment,MyUser
 
 
 class ProjectAPIView(viewsets.ModelViewSet):
@@ -21,7 +22,11 @@ class ProjectAPIView(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
     def get_queryset(self, *args, **kwargs):
-        return Projects.objects.all()
+        contributor = Contributors.objects.filter(user_id=self.request.user)
+        if not Contributors.objects.filter(user_id=self.request.user).exists():
+               return Projects.objects.filter(author_user_id=self.request.user)
+        else:
+            return Projects.objects.filter(author_user_id=self.request.user) | Projects.objects.filter(project_id=contributor.values_list("project_id")[0][0])
 
     def create(self, request, *args, **kwargs):
         project = Projects(author_user_id=self.request.user)
@@ -33,7 +38,8 @@ class ProjectAPIView(viewsets.ModelViewSet):
             return Response(serializer.errors, status=status.HTTP_403_FORBIDDEN)
 
     def delete(self, project_id, *args, **kwargs):
-        project_data = Projects.objects.get(pk=project_id)
+        
+        project_data = Projects.objects.get(pk=id)
         project_data.delete()
         return project_data
 
@@ -49,20 +55,22 @@ class ContributorAPIView(viewsets.ModelViewSet):
     serializer_class = ContributorSerializer
 
     def get_queryset(self):
-        return Contributors.objects.filter(project_id=self.kwargs["project_pk"])
+        return Contributors.objects.filter(project_id=self.kwargs['project_pk'])
 
     def create(self, request, *arg, **kwargs):
+        
         issue_data = Contributors(
-            project_id=self.kwargs.get("project_pk"), user_id=self.request.user.id
+            project_id= Projects.objects.get(project_id=self.kwargs.get("project_pk")), user_id=MyUser(request.POST)
         )
         serializer = self.serializer_class(issue_data, data=request.data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            try:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            except IntegrityError:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, project_id, *args, **kwargs):
+    def delete(self, *args, **kwargs):
         author = Contributors.objects.get(pk=id)
         author.delete()
         return author
@@ -86,7 +94,7 @@ class IssueAPIView(viewsets.ModelViewSet):
         issue_data = Issue(
             author_user_id=project.author_user_id,
             assignee_user_id=self.request.user,
-            project_id=self.kwargs.get("project_pk"),
+            project_id=Projects(project_id=self.kwargs.get("project_pk")),
         )
         serializer = self.serializer_class(issue_data, data=request.data)
         if serializer.is_valid():
@@ -95,8 +103,10 @@ class IssueAPIView(viewsets.ModelViewSet):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, project_id, *args, **kwargs):
-        issue = Issue.objects.get(pk=project_id)
+
+        
+    def delete(self,*args, **kwargs):
+        issue = Issue.objects.get(pk=self.kwargs.get("pk"))
         issue.delete()
         return issue
 
