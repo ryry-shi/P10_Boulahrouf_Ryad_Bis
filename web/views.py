@@ -58,13 +58,14 @@ class ContributorAPIView(viewsets.ModelViewSet):
         return Contributors.objects.filter(project_id=self.kwargs['project_pk'])
 
     def create(self, request, *arg, **kwargs):
-        
-        issue_data = Contributors(
-            project_id= Projects.objects.get(project_id=self.kwargs.get("project_pk")), user_id=MyUser(request.POST)
-        )
-        serializer = self.serializer_class(issue_data, data=request.data)
+        contributor_data = Contributors(
+            project_id= Projects.objects.get(project_id=self.kwargs.get("project_pk")), user_id=MyUser(request.POST))
+        serializer = self.serializer_class(contributor_data, data=request.data)
         if serializer.is_valid():
+            if serializer.validated_data["user_id"] == self.request.user:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             try:
+                print(serializer.validated_data["user_id"])
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
