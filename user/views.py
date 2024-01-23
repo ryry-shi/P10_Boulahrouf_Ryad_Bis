@@ -13,10 +13,9 @@ class MyUserAPIView(viewsets.ModelViewSet):
     serializer_class = MyUserSerializer
     queryset = MyUser.objects.all()
 
-    def get(self, *args, **kwargs):
-        queryset = MyUser.objects.all()
-        serializer = self.serializer_class(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self, *args, **kwargs):
+        return MyUser.objects.filter(id=self.request.user.id)
+
 
     def post(self, request, *args, **kwargs):
         users_data = request.data
