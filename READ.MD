@@ -22,7 +22,14 @@ Description du programme:
 -4 Création des objets(requis être connecter):
 
     - Création des projet, http://127.0.0.1:8000/project/:
+        - read, update ou supprimer projet(besoin permission) http://127.0.0.1:8000/project/int/
+
     - Création des contributor, http://127.0.0.1:8000/project/int/user
+        - read, update ou supprimer contributor(besoin permission) http://127.0.0.1:8000/project/int/contributor/int/
+
     - Création des issue, http://127.0.0.1:8000/project/int/issue
+        - read, update ou supprimer issue(besoin permission) http://127.0.0.1:8000/project/int/issue/int/
+
     - Création des comment, http://127.0.0.1:8000/project/int/issue/int/comment
+        - read, update ou supprimer comment(besoin permission) http://127.0.0.1:8000/project/int/issue/int/comment/int/
 
