@@ -41,11 +41,13 @@ class IssueSerializer(serializers.ModelSerializer):
         fields = [
             "title",
             "tag",
+            "desc",
             "author_user_id",
             "assignee_user_id",
             "project_id",
             "id",
             "priority",
+            "status",
         ]
         read_only_fields = ["project_id", "id", "author_user_id", "assignee_user_id"]
 
@@ -53,10 +55,12 @@ class IssueSerializer(serializers.ModelSerializer):
         issue = Issue.objects.create(
             title=validated_data["title"],
             tag=validated_data["tag"],
+            desc=validated_data["desc"],
             project_id=validated_data["project_id"],
             author_user_id=validated_data["author_user_id"],
             assignee_user_id=validated_data["assignee_user_id"],
             priority=validated_data["priority"],
+            status=validated_data["status"],
         )
         issue.save()
         return issue

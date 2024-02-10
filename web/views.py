@@ -65,7 +65,6 @@ class ContributorAPIView(viewsets.ModelViewSet):
             if serializer.validated_data["user_id"] == self.request.user:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             try:
-                print(serializer.validated_data["user_id"])
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             except IntegrityError:
